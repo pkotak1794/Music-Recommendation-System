@@ -1,3 +1,4 @@
+(batch "output.clp"
 (Music (title Blinding Lights) (artist The Weeknd) (top_genre canadian contemporary r&b) (year 2020) (beats_per_minute 171) (energy 73) (danceability 51) (loudness_dB -6) (liveness 9) (valance 33) (length 200) (acousticness 0) (speechiness 6) (popularity 91)
 (Music (title Watermelon Sugar) (artist Harry Styles) (top_genre pop) (year 2019) (beats_per_minute 95) (energy 82) (danceability 55) (loudness_dB -4) (liveness 34) (valance 56) (length 174) (acousticness 12) (speechiness 5) (popularity 88)
 (Music (title Mood (feat. iann dior)) (artist 24kGoldn) (top_genre cali rap) (year 2021) (beats_per_minute 91) (energy 72) (danceability 70) (loudness_dB -4) (liveness 32) (valance 73) (length 141) (acousticness 17) (speechiness 4) (popularity 88)
@@ -98,3 +99,4 @@
 (Music (title Emotions) (artist Mark Mendy) (top_genre pop dance) (year 2021) (beats_per_minute 126) (energy 83) (danceability 66) (loudness_dB -5) (liveness 40) (valance 74) (length 172) (acousticness 5) (speechiness 29) (popularity 66)
 (Music (title Cold Water) (artist Major Lazer) (top_genre dance pop) (year 2018) (beats_per_minute 93) (energy 80) (danceability 61) (loudness_dB -5) (liveness 16) (valance 50) (length 185) (acousticness 7) (speechiness 4) (popularity 56)
 (Music (title I Took A Pill In Ibiza - Seeb Remix) (artist Mike Posner) (top_genre dance pop) (year 2016) (beats_per_minute 102) (energy 73) (danceability 67) (loudness_dB -7) (liveness 9) (valance 66) (length 198) (acousticness 3) (speechiness 10) (popularity 53)
+)
