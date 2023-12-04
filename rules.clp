@@ -7,6 +7,12 @@
    (slot popularity)
    (slot length)
    (slot mood)
+) ; 10
+
+(deffunction find-song-by-genre (?genre)
+   (find-all-facts ((?m Music))
+      (eq ?m:top_genre ?genre)
+   )
 )
 
 (defrule start-menu
@@ -27,30 +33,49 @@
       (printout t "======================================================" crlf)
       (printout t "Enter Choice: ")
       (bind ?menu (read))
+
       (if (eq ?menu 1)
          then
          (printout t "Enter your preferred music genre: ")
          (bind ?userGenre (read))
          (assert (UserInput (value ?menu) (genre ?userGenre)))
-         else
+         ; Retrieve songs that match the user's preferred genre
+         (bind ?songs (find-song-by-genre ?userGenre))
+
+         (if (neq (length$ ?songs) 0)
+            then
+            (printout t crlf crlf)
+            (printout t "Recommended Songs:" crlf)
+            (bind ?firstSong TRUE)
+            (loop-for-count (?i (length$ ?songs))
+               (bind ?song (nth$ ?i ?songs))
+               (printout t "Title: " (fact-slot-value ?song 'title) crlf)
+               (printout t "Artist: " (fact-slot-value ?song 'artist) crlf)
+               (printout t crlf)
+            )
+            (assert (_music-recommendation))
+            else
+            (printout t "No songs found for the specified genre." crlf)
+         )
+      else
          (if (eq ?menu 2)
             then
             (printout t "Enter your preferred artist: ")
             (bind ?userArtist (read))
             (assert (UserInput (value ?menu) (artist ?userArtist)))
-            else
+         else
             (if (eq ?menu 3)
                then
                (printout t "Enter your preferred beats per minute: ")
                (bind ?userBeats (read))
                (assert (UserInput (value ?menu) (beats ?userBeats)))
-               else
+            else
                (if (eq ?menu 4)
                   then
                   (printout t "Enter your preferred year: ")
                   (bind ?userYear (read))
                   (assert (UserInput (value ?menu) (year ?userYear)))
-                  else
+               else
                   (if (eq ?menu 5)
                      then
                      (printout t "Enter your preferred popularity: ")
