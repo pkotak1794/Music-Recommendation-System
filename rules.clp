@@ -1,3 +1,5 @@
+; added two facts here temporarily so both files don't have to be loaded while we are still writing the code
+
 (deftemplate Music
    (multislot title)
    (multislot artist)
