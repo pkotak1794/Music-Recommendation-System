@@ -10,6 +10,8 @@
    (slot mood)
 ) 
 
+; --------------- function definitions --------------------------------------
+
 ; function definition for searching facts by genre
 ; compares user entered genre to genres defined in facts
 (deffunction find-song-by-genre (?genre)
@@ -25,6 +27,18 @@
       (eq ?m:artist ?artist)
    )
 )
+
+; function definition for searching facts by year
+(deffunction find-song-by-year (?year)
+   (find-all-facts ((?m Music))
+      (eq ?m:year ?year)
+   )
+)
+
+
+; ------------------ end function definitions ----------------------------------
+
+; ------------------ program start ---------------------------------------------
 
 ; menu for user to pick how they would like to get songs recommended to them
 ; 7 options for song discovery 
@@ -47,7 +61,7 @@
       (printout t "Enter Choice: ")
       (bind ?menu (read))
 
-		; user selected option 1 from the menu
+	; user selected option 1 from the menu
       (if (eq ?menu 1)
          then
          (printout t "Enter your preferred music genre: ")
@@ -75,6 +89,7 @@
          )
       else
       
+      	; if user selects option 2 from the menu 
          (if (eq ?menu 2)
             then
             (printout t "Enter your preferred artist: ")
@@ -96,21 +111,43 @@
             	)
             	(assert (_music-recommendation))
             	else
-            	(printout t "No songs found for the specified genre." crlf)
+            	(printout t "No songs found for the specified artist." crlf)
          	)
 
+	; need to add code for this option
          else
             (if (eq ?menu 3)
                then
                (printout t "Enter your preferred beats per minute: ")
                (bind ?userBeats (read))
                (assert (UserInput (value ?menu) (beats ?userBeats)))
+               
+            ; if user selects option 4 from the menu 
             else
                (if (eq ?menu 4)
                   then
                   (printout t "Enter your preferred year: ")
                   (bind ?userYear (read))
                   (assert (UserInput (value ?menu) (year ?userYear)))
+                  
+                  ; Retrieve songs that match the user's preferred genre
+         			(bind ?songs (find-song-by-year ?userYear))
+         			(if (neq (length$ ?songs) 0)
+            			then
+            			(printout t crlf crlf)
+            			(printout t "Recommended Songs:" crlf)
+            			(bind ?firstSong TRUE)
+            			(loop-for-count (?i (length$ ?songs))
+               			(bind ?song (nth$ ?i ?songs))
+               			(printout t "Title: " (fact-slot-value ?song 'title) crlf)
+               			(printout t "Artist: " (fact-slot-value ?song 'artist) crlf)
+               			(printout t crlf)
+            			)
+            			(assert (_music-recommendation))
+            			else
+            			(printout t "No songs found for the specified year." crlf)
+         			)
+
                else
                   (if (eq ?menu 5)
                      then
