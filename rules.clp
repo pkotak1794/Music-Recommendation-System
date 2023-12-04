@@ -35,6 +35,13 @@
    )
 )
 
+; function definition for searching facts by length
+(deffunction find-song-by-length (?length)
+   (find-all-facts ((?m Music))
+      (eq ?m:length ?length)
+   )
+)
+
 
 ; ------------------ end function definitions ----------------------------------
 
@@ -148,18 +155,40 @@
             			(printout t "No songs found for the specified year." crlf)
          			)
 
+					; need to add code here
                else
                   (if (eq ?menu 5)
                      then
                      (printout t "Enter your preferred popularity: ")
                      (bind ?userPopularity (read))
                      (assert (UserInput (value ?menu) (popularity ?userPopularity)))
+                     
+                	; if user selects option 6 from the menu
                   else
                      (if (eq ?menu 6)
                         then
-                        (printout t "Enter your preferred song length: ")
+                        (printout t "Enter your preferred song length in seconds between 120 - 300: ")
                         (bind ?userLength (read))
                         (assert (UserInput (value ?menu) (length ?userLength)))
+                        
+                        ; Retrieve songs that match the user's preferred genre
+         					(bind ?songs (find-song-by-length ?userLength))
+         					(if (neq (length$ ?songs) 0)
+            					then
+            					(printout t crlf crlf)
+            					(printout t "Recommended Songs:" crlf)
+            					(bind ?firstSong TRUE)
+            					(loop-for-count (?i (length$ ?songs))
+               					(bind ?song (nth$ ?i ?songs))
+               					(printout t "Title: " (fact-slot-value ?song 'title) crlf)
+               					(printout t "Artist: " (fact-slot-value ?song 'artist) crlf)
+               					(printout t crlf)
+            					)
+            					(assert (_music-recommendation))
+            					else
+            					(printout t "No songs found for the specified length." crlf)
+         					)
+
                      else
                         (if (eq ?menu 7)
                            then
