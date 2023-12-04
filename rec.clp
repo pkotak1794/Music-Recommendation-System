@@ -72,22 +72,3 @@
    )
 )
 
-(assert
-   (Music 
-   	(title {"Mood (feat. iann dior)"}) 
-   	(artist "24kGoldn") 
-   	(top_genre {"cali rap"}) 
-   	(year 2021) 
-   	(beats_per_minute 91) 
-   	(energy 72) 
-   	(danceability 70) 
-   	(loudness_dB -4) 
-   	(liveness 32) 
-   	(valance 73) 
-   	(length 141) 
-   	(acousticness 17) 
-   	(speechiness 4) 
-   	(popularity 88)
-   )
-)
-
