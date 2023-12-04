@@ -1,20 +1,33 @@
+; defines structure of user input 
 (deftemplate UserInput
    (slot value)
-   (slot genre)
-   (slot artist)
+   (multislot genre)
+   (multislot artist)
    (slot beats)
    (slot year)
    (slot popularity)
    (slot length)
    (slot mood)
-) ; 10
+) 
 
+; function definition for searching facts by genre
+; compares user entered genre to genres defined in facts
 (deffunction find-song-by-genre (?genre)
    (find-all-facts ((?m Music))
       (eq ?m:top_genre ?genre)
    )
 )
 
+; function definition for searching facts by artist 
+; compares user entered artist to artists defined in facts 
+(deffunction find-song-by-artist (?artist)
+   (find-all-facts ((?m Music))
+      (eq ?m:artist ?artist)
+   )
+)
+
+; menu for user to pick how they would like to get songs recommended to them
+; 7 options for song discovery 
 (defrule start-menu
    (not (_music-recommendation))
    =>
@@ -34,14 +47,17 @@
       (printout t "Enter Choice: ")
       (bind ?menu (read))
 
+		; user selected option 1 from the menu
       (if (eq ?menu 1)
          then
          (printout t "Enter your preferred music genre: ")
          (bind ?userGenre (read))
          (assert (UserInput (value ?menu) (genre ?userGenre)))
+         
          ; Retrieve songs that match the user's preferred genre
          (bind ?songs (find-song-by-genre ?userGenre))
-
+         (printout t "Debug: User Genre - " ?userGenre crlf)
+         (printout t "Debug: Matching Songs - " ?songs crlf)
          (if (neq (length$ ?songs) 0)
             then
             (printout t crlf crlf)
@@ -58,11 +74,31 @@
             (printout t "No songs found for the specified genre." crlf)
          )
       else
+      
          (if (eq ?menu 2)
             then
             (printout t "Enter your preferred artist: ")
             (bind ?userArtist (read))
             (assert (UserInput (value ?menu) (artist ?userArtist)))
+            
+            ;Retrieve songs that match user's artist preference
+            (bind ?songs (find-song-by-artist ?userArtist))
+         	(if (neq (length$ ?songs) 0)
+            	then
+            	(printout t crlf crlf)
+            	(printout t "Recommended Songs:" crlf)
+            	(bind ?firstSong TRUE)
+            	(loop-for-count (?i (length$ ?songs))
+               	(bind ?song (nth$ ?i ?songs))
+               	(printout t "Title: " (fact-slot-value ?song 'title) crlf)
+               	(printout t "Artist: " (fact-slot-value ?song 'artist) crlf)
+               	(printout t crlf)
+            	)
+            	(assert (_music-recommendation))
+            	else
+            	(printout t "No songs found for the specified genre." crlf)
+         	)
+
          else
             (if (eq ?menu 3)
                then
