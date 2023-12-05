@@ -1,7 +1,7 @@
 (deftemplate Music
    (multislot title)
-   (multislot artist)
-   (multislot top_genre)
+   (slot artist)
+   (slot top_genre)
    (slot year)
    (slot beats_per_minute)
    (slot energy)
@@ -54,9 +54,9 @@
 ; defines structure of user input 
 (deftemplate UserInput
    (slot value)
-   (multislot genre)
-   (multislot artist)
-   (slot beats)
+   (slot genre (type STRING))
+   (slot artist (type STRING))
+   (slot beats_per_minute)
    (slot year)
    (slot popularity)
    (slot length)
@@ -68,7 +68,7 @@
 ; function definition for searching facts by genre
 ; compares user entered genre to genres defined in facts
 (deffunction find-song-by-genre (?genre)
-   (find-all-facts ((?m Music))
+  (find-all-facts ((?m Music))
       (eq ?m:top_genre ?genre)
    )
 )
@@ -78,6 +78,13 @@
 (deffunction find-song-by-artist (?artist)
    (find-all-facts ((?m Music))
       (eq ?m:artist ?artist)
+   )
+)
+
+; function definition for searching facts by beats per minute
+(deffunction find-song-by-beats (?beats)
+   (find-all-facts ((?m Music))
+      (eq ?m:beats_per_minute ?beats)
    )
 )
 
@@ -92,6 +99,13 @@
 (deffunction find-song-by-length (?length)
    (find-all-facts ((?m Music))
       (eq ?m:length ?length)
+   )
+)
+
+; function definition for searching facts by popularity
+(deffunction find-song-by-popularity (?popularity)
+   (find-all-facts ((?m Music))
+      (eq ?m:popularity ?popularity)
    )
 )
 
@@ -132,13 +146,11 @@
       (if (eq ?menu 1)
          then
          (printout t "Enter your preferred music genre: ")
-         (bind ?userGenre (read))
+         (bind ?userGenre (readline))
          (assert (UserInput (value ?menu) (genre ?userGenre)))
          
          ; Retrieve songs that match the user's preferred genre
          (bind ?songs (find-song-by-genre ?userGenre))
-         (printout t "Debug: User Genre - " ?userGenre crlf)
-         (printout t "Debug: Matching Songs - " ?songs crlf)
          (if (neq (length$ ?songs) 0)
             then
             (printout t crlf crlf)
@@ -181,13 +193,32 @@
             	(printout t "No songs found for the specified artist." crlf)
          	)
 
-	; need to add code for this option
+        
          else
+             ; if user selects option 3 from the menu
             (if (eq ?menu 3)
                then
-               (printout t "Enter your preferred beats per minute: ")
+               (printout t "Enter your preferred beats per minute of the song: ")
                (bind ?userBeats (read))
-               (assert (UserInput (value ?menu) (beats ?userBeats)))
+                  (assert (UserInput (value ?menu) (beats ?userBeats)))
+                  
+                  ; Retrieve songs that match the user's preferred BPM
+         			(bind ?songs (find-song-by-beats ?userBeats))
+         			(if (neq (length$ ?songs) 0)
+            			then
+            			(printout t crlf crlf)
+            			(printout t "Recommended Songs:" crlf)
+            			(bind ?firstSong TRUE)
+            			(loop-for-count (?i (length$ ?songs))
+               			(bind ?song (nth$ ?i ?songs))
+               			(printout t "Title: " (fact-slot-value ?song title) crlf)
+               			(printout t "Artist: " (fact-slot-value ?song artist) crlf)
+               			(printout t crlf)
+            			)
+            			(assert (_music-recommendation))
+            			else
+            			(printout t "No songs found for the specified beats per." crlf)
+         			)
                
             ; if user selects option 4 from the menu 
             else
@@ -197,7 +228,7 @@
                   (bind ?userYear (read))
                   (assert (UserInput (value ?menu) (year ?userYear)))
                   
-                  ; Retrieve songs that match the user's preferred genre
+                  ; Retrieve songs that match the user's preferred year
          			(bind ?songs (find-song-by-year ?userYear))
          			(if (neq (length$ ?songs) 0)
             			then
@@ -215,13 +246,31 @@
             			(printout t "No songs found for the specified year." crlf)
          			)
 
-					; need to add code here
+					; if user selects option 5 from the menu 
                else
                   (if (eq ?menu 5)
-                     then
-                     (printout t "Enter your preferred popularity: ")
-                     (bind ?userPopularity (read))
-                     (assert (UserInput (value ?menu) (popularity ?userPopularity)))
+                  then
+                  (printout t "Enter your preferred popularity (value between 0 and 100, with 100 being the most popular): ")
+                  (bind ?userPopularity (read))
+                  (assert (UserInput (value ?menu) (popularity ?userPopularity)))
+                  
+                  ; Retrieve songs that match the user's preferred Popularity
+         			(bind ?songs (find-song-by-popularity ?userPopularity))
+         			(if (neq (length$ ?songs) 0)
+            			then
+            			(printout t crlf crlf)
+            			(printout t "Recommended Songs:" crlf)
+            			(bind ?firstSong TRUE)
+            			(loop-for-count (?i (length$ ?songs))
+               			(bind ?song (nth$ ?i ?songs))
+               			(printout t "Title: " (fact-slot-value ?song title) crlf)
+               			(printout t "Artist: " (fact-slot-value ?song artist) crlf)
+               			(printout t crlf)
+            			)
+            			(assert (_music-recommendation))
+            			else
+            			(printout t "No songs found for the specified popularity." crlf)
+         			)
                      
                 	; if user selects option 6 from the menu
                   else
@@ -281,7 +330,7 @@
                               (printout t "Exiting the Music Recommendation System." crlf)
                               (exit)
                            else
-                              (printout t "Invalid input. Please enter a number between 1 and 8." crlf)
+                              (printout t "Invalid input. Please restart and then enter a number between 1 and 8." crlf)
                            )
                         )
                      )
