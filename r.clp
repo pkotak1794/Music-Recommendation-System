@@ -233,3 +233,10 @@
    (printout t "Thank you for using the Music Recommendation System! Now exiting the program." crlf)
    (halt)
 )
+
+(defrule invalide-choice
+   (UserInput (value ?UserInput&:(or (< ?UserInput 1) (> ?UserInput 8))))
+   =>
+   (printout t "Invalid Choice! Please restart and enter a number 1-8." crlf)
+   (halt)
+)
