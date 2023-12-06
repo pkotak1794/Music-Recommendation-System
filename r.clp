@@ -93,17 +93,20 @@
    (bind ?userGenre (read))
    (bind ?userGenre (lowcase ?userGenre)) ; Convert input to lowercase for case-insensitive comparison
    (printout t crlf crlf)
-   (printout t "Recommended songs in the genre " ?userGenre ":" crlf)
-   
+   (bind ?songsFound FALSE)
    (do-for-all-facts ((?m Music)) 
       (if (eq (str-compare ?m:top_genre ?userGenre) 0) 
          then 
          (progn 
+            (printout t "Recommended songs in the genre " ?userGenre ":" crlf)
             (printout t "Title: " ?m:title ", Artist: " ?m:artist crlf)
          )
       )
+   (bind ?songsFound TRUE))
+   (if (not ?songsFound)
+      then
+      (printout t "No songs found for the specified genre." crlf)
    )
-   
    (printout t crlf)
 )
 
@@ -116,17 +119,20 @@
    (bind ?userArtist (readline)) ; Use readline to capture the entire user input as a string
    (bind ?userArtist (lowcase ?userArtist)) ; Convert input to lowercase for case-insensitive comparison
    (printout t crlf crlf)
-   (printout t "Recommended songs by " ?userArtist ":" crlf)
-   
+   (bind ?songsFound FALSE)
    (do-for-all-facts ((?m Music)) 
       (if (eq (str-compare ?m:artist ?userArtist) 0) 
          then 
-         (progn 
+         (progn
+            (printout t "Recommended songs by " ?userArtist ":" crlf) 
             (printout t "Title: " ?m:title ", Artist: " ?m:artist crlf)
          )
       )
+   (bind ?songsFound TRUE))
+   (if (not ?songsFound)
+      then
+      (printout t "No songs found for the specified artist." crlf)
    )
-   
    (printout t crlf)
 )
 
