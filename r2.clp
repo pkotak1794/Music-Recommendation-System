@@ -1448,7 +1448,7 @@
 
    (Music 
    	(title "Cheap Thrills") 
-   	(artist "Sia") 
+   	(artist "sia") 
    	(top_genre "australian dance") 
    	(year 2016) 
    	(beats_per_minute 90) 
@@ -1750,12 +1750,12 @@
    (UserInput (value 2))
    =>
    (printout t "Enter the name of an artist you like: ")
-   (bind ?userArtist (readline)) ; Use readline to capture the entire user input as a string
-   (bind ?userArtist (lowcase ?userArtist)) ; Convert input to lowercase for case-insensitive comparison
+   (bind ?userArtist (read)) ; Use readline to capture the entire user input as a string
+   (bind ?userArtist (lowcase ?userArtist))
    (printout t crlf crlf)
    (bind ?songsFound FALSE)
    (printout t "Recommended songs by " ?userArtist ":" crlf) 
-   (do-for-all-facts ((?m Music)) 
+   (do-for-all-facts ((?m Music))
       (if (eq (str-compare ?m:artist ?userArtist) 0) 
          then 
          (progn
