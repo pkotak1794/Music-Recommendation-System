@@ -1,2 +1,2 @@
-CPSC 583 - Final Project 
-Group Members: Xuan Bui & Priyanka Lee 
+##CPSC 583 - Final Project <br>
+###Group Members: Xuan Bui & Priyanka Lee <br>
