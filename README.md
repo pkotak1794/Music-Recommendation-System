@@ -24,27 +24,27 @@ _ Dataset:(https://www.kaggle.com/datasets/pavan9065/top-100-most-streamed-songs
 #### Using CLIPS to build rules and facts: <br>
 ##### Facts: including title, artist, genre, year, energy, danceability, loudness, liveness, valance, length, acousticsness, speechiness and popularity for each song. <br>
 ##### Rules: <br>
-  + Rule 1 (Genre): <br>
+  + <b> Rule 1 (Genre): </b><br>
       Asks user to enter a genre and provides a playlist of songs that match the user entered genre. <br>
       If no matches are found, user will be recommended a playlist of popular songs instead based on the fallback rule. <br>
-  + Rule 2 (Artist): <br> 
+  + <b> Rule 2 (Artist): </b><br> 
       Asks user to enter an artist and provides a playlist of songs that match the artist input by the user. <br>
       If no matches are found, user will be recommended a playlist of popular songs instead based on the fallback rule. <br>
-  + Rule 3 (Beats Per Minute): <br>
+  + <b> Rule 3 (Beats Per Minute): </b><br>
       Asks user to enter a preferred beats per minute and provides a playlist of songs that match the bpm input by the user. <br>
       If no matches are found, user will be notified that no matches were found. <br>
-  + Rule 4 (Mood & Genre): <br>
+  + <b> Rule 4 (Mood & Genre): </b><br>
       Asks user to enter a preferred genre and mood and provides a single song recommendation if there are applicable matches. <br>
       If no matches are found, user will be recommended a single song based on a fallback rule. <br>
-  + Rule 5 (Popularity & Genre): <br>
+  + <b> Rule 5 (Popularity & Genre): </b><br>
       Asks user to enter a popularity value and preferred genre and provides a single song recommendation if there are applicable matches. <br>
       If no matches are found, user will be recommended a single song based on a fallback rule. <br>
-  + Rule 6 (Mood): <br>
+  + <b> Rule 6 (Mood): </b><br>
       Asks user to enter a mood preference and provides a playlist of songs if there are applicable matches. <br>
       If no matches are found, user will be recommended a playlist of songs that are within a specified range of the entered mood. <br>
-  + Rule 7 (Genre, Artist, & Year): <br>
+  + <b> Rule 7 (Genre, Artist, & Year): </b><br>
       Asks user to enter a preferred genre, artist, and year and provides a single song recommendation if there are applicable matches. <br>
       If no matches are found, user will be recommended a single song based on a fallback rule. <br>
-  + Rule 8 (Exit): <br>
+  + <b> Rule 8 (Exit): </b><br>
       When user is ready to exit the program, this rule will terminate the program. <br> 
  
