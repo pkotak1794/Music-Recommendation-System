@@ -8,11 +8,11 @@ _ Using Kaggle to get a dataset of the Top 100 Streamed Songs & their attributes
 _ Dataset:(https://www.kaggle.com/datasets/pavan9065/top-100-most-streamed-songs-on-spotify)<br>
 
 #### Project Files <br> 
-songs.csv - holds the dataset downloaded from Kaggle of the "Top 100 Most Streamed Songs on Spotify" <br>
-pyscript.py - Python script used to extract the data from the csv file and put it in CLIPS fact format <br>
-output.clp - output file of CLIPS facts that were extracted using the Python script <br> 
-facts.clp - all the fact templates and facts from the database <br> 
-music_rules.clp - rules and user interface for the program <br> 
+<b> songs.csv </b> - holds the dataset downloaded from Kaggle of the "Top 100 Most Streamed Songs on Spotify" <br>
+<b> pyscript.py </b> - Python script used to extract the data from the csv file and put it in CLIPS fact format <br>
+<b> output.clp </b> - output file of CLIPS facts that were extracted using the Python script <br> 
+<b> facts.clp </b> - all the fact templates and facts from the database <br> 
+<b> music_rules.clp </b> - rules and user interface for the program <br> 
 
 #### How To Run The Program <br> 
 1.) load the "facts.clp" file into your CLIPS IDE <br>
@@ -22,8 +22,8 @@ music_rules.clp - rules and user interface for the program <br>
 
 #### Techniques: <br>
 #### Using CLIPS to build rules and facts: <br>
-_ Facts: including title, artist, genre, year, energy, danceability, loudness, liveness, valance, length, acousticsness, speechiness and popularity for each song. <br>
-_ Rules: <br>
+##### Facts: including title, artist, genre, year, energy, danceability, loudness, liveness, valance, length, acousticsness, speechiness and popularity for each song. <br>
+##### Rules: <br>
   + Rule 1 (Genre): <br>
       Asks user to enter a genre and provides a playlist of songs that match the user entered genre. <br>
       If no matches are found, user will be recommended a playlist of popular songs instead based on the fallback rule. <br>
