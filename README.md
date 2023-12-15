@@ -7,14 +7,14 @@
 _ Using Kaggle to get a dataset of the Top 100 Streamed Songs & their attributes from the Spotify API. <br>
 _ Dataset:(https://www.kaggle.com/datasets/pavan9065/top-100-most-streamed-songs-on-spotify)<br>
 
-#### Project Files <br> 
+#### Project Files: <br> 
 <b> songs.csv </b> - holds the dataset downloaded from Kaggle of the "Top 100 Most Streamed Songs on Spotify" <br>
 <b> pyscript.py </b> - Python script used to extract the data from the csv file and put it in CLIPS fact format <br>
 <b> output.clp </b> - output file of CLIPS facts that were extracted using the Python script <br> 
 <b> facts.clp </b> - all the fact templates and facts from the database <br> 
 <b> music_rules.clp </b> - rules and user interface for the program <br> 
 
-#### How To Run The Program <br> 
+#### How To Run The Program: <br> 
 1.) load the "facts.clp" file into your CLIPS IDE <br>
 2.) load the "music_rules.clp" file into your CLIPS IDE <br>
 3.) enter (reset) to initialize the fact list <br>
