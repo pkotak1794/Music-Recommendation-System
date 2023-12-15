@@ -5,19 +5,46 @@
 
 #### Dataset: 
 _ Using Kaggle to get a dataset of the Top 100 Streamed Songs & their attributes from the Spotify API. <br>
-_ Dataset: https://github.com/pkotak1794/Music-Recommendation-System/blob/main/songs.csv <br>
+_ Dataset:(https://www.kaggle.com/datasets/pavan9065/top-100-most-streamed-songs-on-spotify)<br>
+
+#### Project Files <br> 
+songs.csv - holds the dataset downloaded from Kaggle of the "Top 100 Most Streamed Songs on Spotify" <br>
+pyscript.py - Python script used to extract the data from the csv file and put it in CLIPS fact format <br>
+output.clp - output file of CLIPS facts that were extracted using the Python script <br> 
+facts.clp - all the fact templates and facts from the database <br> 
+music_rules.clp - rules and user interface for the program <br> 
+
+#### How To Run The Program <br> 
+1.) load the "facts.clp" file into your CLIPS IDE <br>
+2.) load the "music_rules.clp" file into your CLIPS IDE <br>
+3.) enter (reset) to initialize the fact list <br>
+4.) enter (run) to start the program <br> 
 
 #### Techniques: <br>
 #### Using CLIPS to build rules and facts: <br>
-_ CLIP code: https://github.com/pkotak1794/Music-Recommendation-System/blob/main/r2.clp <br>
 _ Facts: including title, artist, genre, year, energy, danceability, loudness, liveness, valance, length, acousticsness, speechiness and popularity for each song. <br>
 _ Rules: <br>
-  + Rule 1: 
-  + Rule 2:
-  + Rule 3:
-  + Rule 4:
-  + Rule 5
-  + Rule 6:
-  + Rule 7:
-  + Rule 8:
-  + Rule 9
+  + Rule 1 (Genre): <br>
+      Asks user to enter a genre and provides a playlist of songs that match the user entered genre. <br>
+      If no matches are found, user will be recommended a playlist of popular songs instead based on the fallback rule. <br>
+  + Rule 2 (Artist): <br> 
+      Asks user to enter an artist and provides a playlist of songs that match the artist input by the user. <br>
+      If no matches are found, user will be recommended a playlist of popular songs instead based on the fallback rule. <br>
+  + Rule 3 (Beats Per Minute): <br>
+      Asks user to enter a preferred beats per minute and provides a playlist of songs that match the bpm input by the user. <br>
+      If no matches are found, user will be notified that no matches were found. <br>
+  + Rule 4 (Mood & Genre): <br>
+      Asks user to enter a preferred genre and mood and provides a single song recommendation if there are applicable matches. <br>
+      If no matches are found, user will be recommended a single song based on a fallback rule. <br>
+  + Rule 5 (Popularity & Genre): <br>
+      Asks user to enter a popularity value and preferred genre and provides a single song recommendation if there are applicable matches. <br>
+      If no matches are found, user will be recommended a single song based on a fallback rule. <br>
+  + Rule 6 (Mood): <br>
+      Asks user to enter a mood preference and provides a playlist of songs if there are applicable matches. <br>
+      If no matches are found, user will be recommended a playlist of songs that are within a specified range of the entered mood. <br>
+  + Rule 7 (Genre, Artist, & Year): <br>
+      Asks user to enter a preferred genre, artist, and year and provides a single song recommendation if there are applicable matches. <br>
+      If no matches are found, user will be recommended a single song based on a fallback rule. <br>
+  + Rule 8 (Exit): <br>
+      When user is ready to exit the program, this rule will terminate the program. <br> 
+ 
