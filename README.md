@@ -12,5 +12,12 @@ _ Dataset: https://github.com/pkotak1794/Music-Recommendation-System/blob/main/s
 _ CLIP code: https://github.com/pkotak1794/Music-Recommendation-System/blob/main/r2.clp <br>
 _ Facts: including title, artist, genre, year, energy, danceability, loudness, liveness, valance, length, acousticsness, speechiness and popularity for each song. <br>
 _ Rules: <br>
-  + Rule 1:
-  + 
+  + Rule 1: 
+  + Rule 2:
+  + Rule 3:
+  + Rule 4:
+  + Rule 5
+  + Rule 6:
+  + Rule 7:
+  + Rule 8:
+  + Rule 9
